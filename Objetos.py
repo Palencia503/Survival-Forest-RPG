@@ -7,14 +7,18 @@ class Objeto:
     #devuelve una copia simple del objeto base
     def clonar(self): 
         return Objeto(self.tipo, self.nom, self.precio)
+    #texto que se muestra
+    def __str__(self):
+        return f"{self.nom} - Precio: {self.precio}"
     
-#Clase para pociones(curacion o daño)
+#Clase para pociones(curacion o dano)
 class Pocion(Objeto):
     def __init__(self, tipo, cantidad, nom, precio, cura = 0, dano = 0):
         super().__init__(tipo, nom, precio)
         self.cantidad = cantidad
         self.cura = cura
         self.dano = dano
+        
     #devuelve una copia de la pocion
     def clonar(self):
         return Pocion(self.tipo, 1, self.nom, self.precio, self.cura, self.dano)

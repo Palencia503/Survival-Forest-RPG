@@ -1,0 +1,23 @@
+{
+    "Tanque": {
+        "nom": "Escudo Simple",
+        "dano": 5,
+        "defensa": 10
+    },
+    "Mago": {
+        "nom": "Varita Simple",
+        "dano": 15
+    },
+    "Asesino": {
+        "nom": "Daga Simple",   
+        "dano": 20
+    },
+    "Tirador": {
+        "nom": "Arco Simple",
+        "dano": 25
+    },
+    "Guerrero": {
+        "nom": "Espada Simple",
+        "dano": 30
+    }
+}

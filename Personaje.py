@@ -1,4 +1,6 @@
+
 from LimpiarPantalla import limpiar_terminal
+from  ui import VERDE, AMARILLO, CIAN, AZUL, ROJO, MAGENTA, BLANCO, RESET
 
 armas_clase = {"tanque": "escudo", 
                 "mago": "varita", 
@@ -8,7 +10,7 @@ armas_clase = {"tanque": "escudo",
             }
 
 class Personaje:
-    #constructor del personaje
+    #CONSTRUCTOR DEL PERSONAJE
     def __init__(self, clase, hp, mana, escudo, ataque):
         self.clase = clase
         self.hp = hp
@@ -16,8 +18,8 @@ class Personaje:
         self.escudo = escudo
         self.ataque = ataque
 
-        self.defensa_base = 0   #defensa natural del personaje
-        self.escudo = 0         
+        self.defensa_base = escudo   #defensa natural del personaje
+        self.escudo = self.defensa_base         
 
         self.dinero = 100 #para pruebas
         self.exp = 0
@@ -88,9 +90,9 @@ class Personaje:
         self.arma["nom"] = nom 
         self.arma["dano"] = dano_final 
 
-        #si el arma es un escudo, SUMAR defensa al escudo actual
+        #si el arma es un escudo, SUMAR defensa a la defensa base
         if "escudo" in nom.lower():
-            self.escudo = self.escudo + defensa
+            self.escudo = self.defensa_base + defensa
         else:
             #si no es escudo, vuelve a defensa base
             self.escudo = self.defensa_base
@@ -102,7 +104,8 @@ class Personaje:
     #desequipar arma
     def desequipar_arma(self):
         self.arma["nom"] = "Punos"
-        self.arma["dano"] = 1
+        self.arma["dano"] = 3
+        self.escudo = self.defensa_base
         print(f"{self.clase} ha vuelto a usar punos.")
 
     #usar pocion
@@ -146,14 +149,14 @@ class Personaje:
     #funcion para mostrar el estado del personaje
     def estado(self):
         print(f'CLASE: {self.clase}')
-        print(f'HP: {self.hp}')
-        print(f'MANA: {self.mana}')
-        print(f'ESCUDO: {self.escudo}')
-        print(f'ATAQUE: {self.ataque}')
-        print(f'EXP: {self.exp}')
-        print(f'ORO: {self.dinero}')
+        print(f'HP: {VERDE}{self.hp}{RESET}')
+        print(f'MANA: {CIAN}{self.mana}{RESET}')
+        print(f'ESCUDO: {AZUL}{self.escudo}{RESET}')
+        print(f'ATAQUE: {ROJO}{self.ataque}{RESET}')
+        print(f'EXP: {MAGENTA}{self.exp}{RESET}')
+        print(f'ORO: {AMARILLO}{self.dinero}{RESET}')
         print(f'NIVEL: {self.nivel}')
-        print(f'ARMA: {self.arma["nom"]} - daño: {self.arma["dano"]}')
+        print(f'{AMARILLO}ARMA:{RESET} {self.arma["nom"]} - dano: {self.arma["dano"]}')
 
     #Ganar experiencia
     def ganar_exp(self, cantidad):
@@ -170,6 +173,7 @@ class Personaje:
             #mejoras por clase
             if self.clase.lower() == "tanque":
                 self.hp += 20
+                self.defensa_base += 10
                 self.escudo += 10
                 self.ataque += 3
 
@@ -189,6 +193,7 @@ class Personaje:
             elif self.clase.lower() == "guerrero":
                 self.hp += 15
                 self.ataque += 5
+                self.defensa_base += 5
                 self.escudo += 5
 
             print(f"\n¡{self.clase} ha subido a NIVEL {self.nivel}!")
@@ -199,7 +204,7 @@ class Personaje:
     #funcion para que el personaje muera
     def morir(self):
         if self.hp <= 0:
-            print(f'{self.clase} has sido derrotado!')
+            print(f'{ROJO}El {self.clase} ha sido derrotado!{RESET}')
             return True
         else:
             return False

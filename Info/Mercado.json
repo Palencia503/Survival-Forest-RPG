@@ -1,0 +1,238 @@
+{
+    "POCIONES CURATIVAS": {
+        "1": {
+            "tipo": "pocion",
+            "nom": "P C basica",
+            "precio": 12,
+            "cantidad": 3,
+            "cura": 10
+        },
+        "2": {
+            "tipo": "pocion",
+            "nom": "P C media",
+            "precio": 18,
+            "cantidad": 2,
+            "cura": 15
+        },
+        "3": {
+            "tipo": "pocion",
+            "nom": "P C avanzada",
+            "precio": 25,
+            "cantidad": 5,
+            "cura": 20
+        },
+        "4": {
+            "tipo": "pocion",
+            "nom": "P C legendaria",
+            "precio": 30,
+            "cantidad": 1,
+            "cura": 25
+        }
+    },
+    "POCIONES DE ATAQUE": {
+        "5": {
+            "tipo": "pocion",
+            "nom": "P A basica",
+            "precio": 10,
+            "cantidad": 20,
+            "dano": 5
+        },
+        "6": {
+            "tipo": "pocion",
+            "nom": "P A media",
+            "precio": 15,
+            "cantidad": 12,
+            "dano": 10
+        },
+        "7": {
+            "tipo": "pocion",
+            "nom": "P A avanzada",
+            "precio": 20,
+            "cantidad": 11,
+            "dano": 15
+        },
+        "8": {
+            "tipo": "pocion",
+            "nom": "P A legendaria",
+            "precio": 25,
+            "cantidad": 10,
+            "dano": 20
+        }
+    },
+    "POCIONES DE MANA": {
+        "9": {
+            "tipo": "pocion",
+            "nom": "P M basica",
+            "precio": 6,
+            "cantidad": 11,
+            "cura": 5
+        },
+        "10": {
+            "tipo": "pocion",
+            "nom": "P M media",
+            "precio": 8,
+            "cantidad": 4,
+            "cura": 10
+        },
+        "11": {
+            "tipo": "pocion",
+            "nom": "P M avanzada",
+            "precio": 12,
+            "cantidad": 6,
+            "cura": 15
+        },
+        "12": {
+            "tipo": "pocion",
+            "nom": "P M legendaria",
+            "precio": 18,
+            "cantidad": 6,
+            "cura": 20
+        }
+    },
+    "ARMAS": {
+        "13": {
+            "tipo": "espada",
+            "nom": "Espada madera",
+            "precio": 50,
+            "cantidad": 4,
+            "dano": 5
+        },
+        "14": {
+            "tipo": "espada",
+            "nom": "Espada hierro",
+            "precio": 100,
+            "cantidad": 7,
+            "dano": 10
+        },
+        "15": {
+            "tipo": "espada",
+            "nom": "Espada diamante",
+            "precio": 200,
+            "cantidad": 4,
+            "dano": 20
+        },
+        "16": {
+            "tipo": "espada",
+            "nom": "Espada legendaria",
+            "precio": 500,
+            "cantidad": 2,
+            "dano": 50
+        },
+        "17": {
+            "tipo": "arco",
+            "nom": "Arco simple",
+            "precio": 50,
+            "cantidad": 3,
+            "dano": 5
+        },
+        "18": {
+            "tipo": "arco",
+            "nom": "Arco reforzado",
+            "precio": 100,
+            "cantidad": 7,
+            "dano": 10
+        },
+        "19": {
+            "tipo": "arco",
+            "nom": "Arco de caza",
+            "precio": 200,
+            "cantidad": 4,
+            "dano": 20
+        },
+        "20": {
+            "tipo": "arco",
+            "nom": "Arco ancestral",
+            "precio": 500,
+            "cantidad": 2,
+            "dano": 50
+        },
+        "21": {
+            "tipo": "daga",
+            "nom": "Daga oxidada",
+            "precio": 50,
+            "cantidad": 4,
+            "dano": 5
+        },
+        "22": {
+            "tipo": "daga",
+            "nom": "Daga afilada",
+            "precio": 100,
+            "cantidad": 7,
+            "dano": 10
+        },
+        "23": {
+            "tipo": "daga",
+            "nom": "Daga de sombra",
+            "precio": 200,
+            "cantidad": 4,
+            "dano": 20
+        },
+        "24": {
+            "tipo": "daga",
+            "nom": "Daga legendaria",
+            "precio": 500,
+            "cantidad": 2,
+            "dano": 50
+        },
+        "25": {
+            "tipo": "varita",
+            "nom": "Varita simple",
+            "precio": 50,
+            "cantidad": 4,
+            "dano": 5
+        },
+        "26": {
+            "tipo": "varita",
+            "nom": "Varita magica",
+            "precio": 100,
+            "cantidad": 7,
+            "dano": 10
+        },
+        "27": {
+            "tipo": "varita",
+            "nom": "Varita arcana",
+            "precio": 200,
+            "cantidad": 4,
+            "dano": 20
+        },
+        "28": {
+            "tipo": "varita",
+            "nom": "Varita ancestral",
+            "precio": 500,
+            "cantidad": 2,
+            "dano": 50
+        },
+        "29": {
+            "tipo": "escudo",
+            "nom": "Escudo madera",
+            "precio": 50,
+            "cantidad": 4,
+            "dano": 5,
+            "defensa": 5
+        },
+        "30": {
+            "tipo": "escudo",
+            "nom": "Escudo hierro",
+            "precio": 100,
+            "cantidad": 7,
+            "dano": 10,
+            "defensa": 10
+        },
+        "31": {
+            "tipo": "escudo",
+            "nom": "Escudo reforzado",
+            "precio": 200,
+            "cantidad": 4,
+            "dano": 20,
+            "defensa": 20
+        },
+        "32": {
+            "tipo": "escudo",
+            "nom": "Escudo legendario",
+            "precio": 500,
+            "cantidad": 2,
+            "dano": 40,
+            "defensa": 40
+        }
+    }
+}

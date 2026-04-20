@@ -5,83 +5,68 @@ from combate import combate
 from exploracion import explorar
 from Mercado import Tienda
 from LimpiarPantalla import limpiar_terminal
+from ui import MARRON, VERDE, AMARILLO, CIAN, AZUL, ROJO, MAGENTA, BLANCO, RESET
+from guardar_datos import guardar_partida, cargar_partida
 
 #diccionario de profesiones
 def obtener_personajes_base():
-    return {
-        1: ("Tanque", 150, 0, 0, 15),
-        2: ("Mago", 80, 20, 0, 15),
-        3: ("Asesino", 80, 0, 0, 15),
-        4: ("Tirador", 70, 0, 0, 15),
-        5: ("Guerrero", 120, 0, 0, 15)
-
-    }
+    ruta = os.path.join("Info", "Personajes.json")
+    try:
+        with open(ruta, "r", encoding="utf-8") as f:
+            datos = json.load(f)
+        
+        personajes = {}
+        for id_pj, info in datos.items():
+            # (clase, hp, mana, escudo, ataque)
+            personajes[int(id_pj)] = (
+                info["clase"],
+                info["hp"],
+                info["mana"],
+                info["escudo"],
+                info["ataque"]
+            )
+        return personajes
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error al cargar profesiones: {e}")
+        return {}
     
+import json
+import os
+
 #diccionario de monstruos. Ordenado por nivel
 def obtener_monstruos_base():
-    return {
-        1:  ("Goblin", 60, 0, 5, 10, 1, {"oro": 10}),
-        2:  ("Lobo", 70, 0, 6, 14, 2, {"tipo": "otros", "nom": "Colmillo afilado"}),
-        3:  ("Esqueleto", 80, 0, 8, 12, 3, {"tipo": "armas", "nom": "Hueso afilado", "dano": 3}),
-        4:  ("Bandido", 90, 0, 10, 15, 4, {"oro": 20}),
-        5:  ("Orco", 110, 5, 12, 18, 5, {"tipo": "armas", "nom": "Espada oxidada", "dano": 5}),
-
-        6:  ("Trol pequeno", 130, 5, 14, 20, 6, {"oro": 25}),
-        7:  ("Murcielago gigante", 120, 0, 10, 22, 7, {"tipo": "otros", "nom": "Ala oscura"}),
-        8:  ("Zombi", 140, 0, 12, 20, 8, {"tipo": "pociones", "nom": "Pocion debil", "curacion": 20}),
-        9:  ("Guerrero esqueleto", 150, 0, 15, 25, 9, {"tipo": "armas", "nom": "Espada rota", "dano": 4}),
-        10: ("Ogro", 180, 5, 18, 28, 10, {"oro": 40}),
-
-        11: ("Lobo alfa", 200, 0, 20, 30, 11, {"tipo": "otros", "nom": "Garra afilada"}),
-        12: ("Chaman orco", 180, 20, 15, 32, 12, {"tipo": "pociones", "nom": "Pocion magica", "curacion": 40}),
-        13: ("Golem de piedra", 250, 0, 25, 35, 13, {"oro": 50}),
-        14: ("Arana gigante", 220, 0, 18, 33, 14, {"tipo": "otros", "nom": "Veneno viscoso"}),
-        15: ("Caballero oscuro", 260, 10, 30, 40, 15, {"tipo": "armas", "nom": "Espada negra", "dano": 10}),
-
-        16: ("Trol de guerra", 300, 10, 28, 42, 16, {"oro": 60}),
-        17: ("Espectro", 240, 30, 10, 38, 17, {"tipo": "otros", "nom": "Esencia oscura"}),
-        18: ("Minotauro", 320, 0, 22, 45, 18, {"tipo": "armas", "nom": "Hacha rota", "dano": 8}),
-        19: ("Harpia", 260, 0, 15, 40, 19, {"tipo": "otros", "nom": "Pluma afilada"}),
-        20: ("Golem de hierro", 350, 0, 35, 50, 20, {"oro": 80}),
-
-        21: ("Demonio menor", 300, 20, 25, 48, 21, {"tipo": "pociones", "nom": "Pocion infernal", "curacion": 60}),
-        22: ("Serpiente colosal", 330, 0, 18, 52, 22, {"tipo": "otros", "nom": "Escama venenosa"}),
-        23: ("Nigromante", 280, 40, 12, 45, 23, {"oro": 100}),
-        24: ("Caballero maldito", 360, 10, 30, 55, 24, {"tipo": "armas", "nom": "Espada maldita", "dano": 15}),
-        25: ("Trol anciano", 400, 15, 32, 60, 25, {"oro": 120}),
-
-        26: ("Dragon joven", 450, 20, 40, 65, 26, {"tipo": "otros", "nom": "Escama roja"}),
-        27: ("Demonio mayor", 420, 30, 35, 70, 27, {"oro": 150}),
-        28: ("Titan de roca", 500, 0, 45, 75, 28, {"tipo": "otros", "nom": "Nucleo de piedra"}),
-        29: ("Dragon adulto", 600, 40, 50, 80, 29, {"tipo": "armas", "nom": "Colmillo de dragon", "dano": 20}),
-        30: ("Senor demonio", 700, 50, 60, 90, 30, {"oro": 200})
-    }
+    ruta = os.path.join("Info", "Monstruos.json")
+    try:
+        with open(ruta, "r", encoding="utf-8") as f:
+            datos = json.load(f)
+        
+        monstruos = {}
+        for id_monster, info in datos.items():
+            # Convertir a tupla para mantener compatibilidad con exploracion.py
+            # (nom, hp, mana, escudo, ataque, nivel, recompensa)
+            monstruos[int(id_monster)] = (
+                info["nombre"],
+                info["hp"],
+                info["mana"],
+                info["defensa"], #En exploracion.py se desempaqueta como 'escudo'
+                info["ataque"],
+                info["nivel"],
+                info["recompensa"]
+            )
+        return monstruos
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error al cargar monstruos: {e}")
+        return {}
 
 #armas iniciales de los personajes
 def armas():
-    return {
-        "Tanque": {
-            "nom": "Escudo Simple",
-            "dano": 5,
-            "defensa": 10,
-        },
-        "Mago": {
-            "nom": "Varita Simple",
-            "dano": 15
-        },
-        "Asesino": {
-            "nom": "Daga Simple",   
-            "dano": 20
-        },
-        "Tirador": {
-            "nom": "Arco Simple",
-            "dano": 25
-        },
-        "Guerrero": {
-            "nom": "Espada Simple",
-            "dano": 30
-        }
-    }
+    ruta = os.path.join("Info", "ArmasIniciales.json")
+    try:
+        with open(ruta, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error al cargar armas iniciales: {e}")
+        return {}
 
 #crear al jugador
 def crear_jugador(personajes_base, puntos_de_habilidad):
@@ -89,7 +74,7 @@ def crear_jugador(personajes_base, puntos_de_habilidad):
         print("\nCREAR PERSONAJE")
         print("--- ELIGE PROFESION ---")
         for i, pj in personajes_base.items(): #muestra las profesiones
-            print(f"{i}. {pj[0]}") 
+            print(f"{i}. {VERDE}{pj[0]}{RESET}") 
         
         try:
             opcion = int(input("Selecciona un numero: "))#elige la profesion
@@ -123,11 +108,11 @@ def crear_jugador(personajes_base, puntos_de_habilidad):
                 print(f"\nTienes {puntos_de_habilidad} puntos de habilidad para añadir a tus atributos.")#muestra los puntos de habilidad
                 
                 while puntos_de_habilidad > 0:#si hay puntos de habilidad continua
-                    print(f"\nPuntos restantes: {puntos_de_habilidad}")#muestra los puntos restantes
-                    print(f"Atributos actuales: HP: {jugador.hp}, Escudo: {jugador.escudo}, Ataque: {jugador.ataque}")#muestra los atributos actuales
-                    print("1. Mejorar HP (+10)")
-                    print("2. Mejorar Escudo (+5)")
-                    print("3. Mejorar Ataque (+2)")
+                    print(f"\nPuntos restantes:{VERDE} {puntos_de_habilidad}{RESET}")#muestra los puntos restantes
+                    print(f"Atributos actuales: HP:{VERDE}{jugador.hp}{RESET}, Escudo: {AZUL}{jugador.escudo}{RESET}, Ataque: {ROJO}{jugador.ataque}{RESET}")#muestra los atributos actuales
+                    print(f"{AMARILLO}1. Mejorar HP (+10){RESET}")
+                    print(f"{AMARILLO}2. Mejorar Escudo (+5){RESET}")
+                    print(f"{AMARILLO}3. Mejorar Ataque (+2){RESET}")
                     
                     eleccion = input("Selecciona que mejorar: ")#elige la mejora
                     limpiar_terminal()  #limpia terminal
@@ -136,6 +121,7 @@ def crear_jugador(personajes_base, puntos_de_habilidad):
                         puntos_de_habilidad -= 1#resta un punto de habilidad
 
                     elif eleccion == "2":
+                        jugador.defensa_base += 5
                         jugador.escudo += 5  #mejora el escudo
                         puntos_de_habilidad -= 1#resta un punto de habilidad
 
@@ -157,7 +143,7 @@ def crear_jugador(personajes_base, puntos_de_habilidad):
 
 #mochila
 def menu_mochila(jugador):
-    while True:    
+    while True:   
         limpiar_terminal()
         print("--- MOCHILA ---")
         print("1. Ver pociones")
@@ -214,10 +200,10 @@ def menu_equipar_arma(jugador):
         print("Opcion no valida.")
         input("ENTER...")
         return
-    #si elige desequipar equipo los puños
+    #si elige desequipar
     eleccion = int(eleccion)
     if eleccion == 0: 
-        jugador.equipar_arma("Punos", 1) 
+        jugador.desequipar_arma() 
         input("ENTER...") 
         return
     #control de numeros negativos o que no existan
@@ -233,15 +219,20 @@ def menu_equipar_arma(jugador):
 
 
 def main():
-    print('    -------------------------------------')
-    print('             Survival-Forest-RPG')
-    print('    -------------------------------------\n')
-    inicio_historia = """
+    limpiar_terminal()#limpia terminal
+    print(F'{AZUL}    -------------------------------------{RESET}')
+    print(f'{AMARILLO}             Survival-Forest-RPG{RESET}')
+    print(f'{AZUL}    -------------------------------------{RESET}\n')
+    inicio_historia = f"""{VERDE}
     Despiertas en un camino polvoriento sin recordar nada.
+
     A lo lejos ves un pequeño pueblo rodeado de murallas.
+
     Un guardia te mira sorprendido.
+
     —¿Otro recien llegado? Entra… aqui estaras a salvo.
-    Asi comienza tu nueva vida. 
+
+    Asi comienza tu nueva vida.{RESET} 
     """
     print(inicio_historia)
     #falta introducir la historia en diferentes partes
@@ -249,27 +240,44 @@ def main():
 
     personajes_base = obtener_personajes_base() #obtiene los personajes base
     monstruos_base = obtener_monstruos_base() #obtiene los monstruos base
-    puntos_de_habilidad = 5 #puntos de habilidad
-    jugador = crear_jugador(personajes_base, puntos_de_habilidad)#crea al jugador
+    
+    # Intentar cargar partida
+    jugador = None
+    piso_actual = 1
+    
+    if os.path.exists(os.path.join("Dades/")):
+        cargar = input("¿Deseas cargar la partida guardada? (s/n): ").strip().lower()
+        if cargar == "s":
+            jugador, piso_actual = cargar_partida()
+            if jugador:
+                print(f"\nPartida cargada. Bienvenido de nuevo, {VERDE}{jugador.clase}{RESET}!")
+                input("ENTER para continuar...")
+                limpiar_terminal()
+            else:
+                print("\nNo se pudo cargar la partida.")
+    
+    if not jugador:
+        puntos_de_habilidad = 5 #puntos de habilidad
+        jugador = crear_jugador(personajes_base, puntos_de_habilidad)#crea al jugador
     
     tienda = Tienda() #la tienda
-    piso_actual = 1
     jugar = True
 
     #bucle principal
     while jugar:  
         #si el personaje muere se acaba el juego.
-        if jugador.hp < 0:
+        if jugador.hp <= 0:
             break
 
-        print("\n--- MENU PRINCIPAL ---")
-        print("1. Explorar")
-        print("2. Ver estado")
-        print("3. Mochila")
-        print("4. Tienda")
-        print("0. Salir")
+        print(f"\n{AZUL}--- MENU PRINCIPAL ---{RESET}")
+        print(f"{CIAN}1. Explorar{RESET}")
+        print(f"{BLANCO}2. Ver estado{RESET}")
+        print(f"{MARRON}3. Mochila{RESET}")
+        print(f"{AMARILLO}4. Tienda{RESET}")
+        print(f"{VERDE}5. Guardar Partida{RESET}")
+        print(f"0. Salir")
         
-        opcion = input("Elige una opcion: ") 
+        opcion = input("Elige una opcion: ")
         #explorar
         if opcion == "1": 
             limpiar_terminal()#limpia terminal
@@ -293,17 +301,41 @@ def main():
 
         #tienda
         elif opcion == "4": 
-            limpiar_terminal()#limpia terminal
-            tienda.mostrar_inventario()
+            while True:
+                limpiar_terminal()
+                print(f"\n{AZUL}- - TIENDA - -{RESET}")
+                print(f"{VERDE}1. Comprar objetos{RESET}")
+                print(f"{VERDE}2. Vender restos de monstruos{RESET}")
+                print(f"0. Salir de la tienda")
 
-            objeto_comprar = input("ID del objeto a comprar: ")
-            if objeto_comprar.isdigit():
-                tienda.comprar(int(objeto_comprar), jugador)
-            else:
-                print("¡¡ Introduce el ID. Ejemplo: 1. !!")
+                opcion_tienda = input("Elige una opcion: ")
+                
+                if opcion_tienda == "1":
+                    limpiar_terminal()
+                    tienda.mostrar_inventario()
 
+                    objeto_comprar = input("ID del objeto a comprar: ")
+                    if objeto_comprar.isdigit():
+                        tienda.comprar(int(objeto_comprar), jugador)
+                    else:
+                        print("¡¡ Introduce el ID. Ejemplo: 1. !!")
+
+                    input("\nPresiona ENTER para continuar...")
+                
+                elif opcion_tienda == "2":
+                    tienda.vender(jugador)
+                
+                elif opcion_tienda == "0":
+                    limpiar_terminal()
+                    break
+                else:
+                    print("Opcion no valida.")
+                    input("\nPresiona ENTER para continuar...")
+        
+        #guardar partida
+        elif opcion == "5":
+            guardar_partida(jugador, piso_actual)
             input("\nPresiona ENTER para continuar...")
-            limpiar_terminal()#limpia terminal
 
         #salir
         elif opcion == "0": 

@@ -1,0 +1,7 @@
+{
+    "1": {"clase": "Tanque", "hp": 150, "mana": 0, "escudo": 0, "ataque": 15},
+    "2": {"clase": "Mago", "hp": 80, "mana": 20, "escudo": 0, "ataque": 15},
+    "3": {"clase": "Asesino", "hp": 80, "mana": 0, "escudo": 0, "ataque": 15},
+    "4": {"clase": "Tirador", "hp": 70, "mana": 0, "escudo": 0, "ataque": 15},
+    "5": {"clase": "Guerrero", "hp": 120, "mana": 0, "escudo": 0, "ataque": 15}
+}
