@@ -8,6 +8,12 @@ from Objetos import Pocion, Arma
 
 def guardar_partida(jugador, piso_actual):
     numero_partida = 600
+    
+    carpeta_dades = "Dades"
+
+    if not os.path.exists(carpeta_dades):
+        os.makedirs(carpeta_dades)
+        
     ruta = os.path.join("Dades", f"{numero_partida}.json")
     
     #convertir inventario a datos serializables
