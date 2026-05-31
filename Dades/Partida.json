@@ -1,0 +1,32 @@
+{
+    "clase": "Mago",
+    "hp": 70,
+    "hp_max": 80,
+    "mana": 20,
+    "mana_max": 20,
+    "escudo": 0,
+    "escudo_base": 0,
+    "defensa_base": 0,
+    "ataque": 15,
+    "dinero": 1870,
+    "exp": 70,
+    "exp_necesaria": 100,
+    "nivel": 0,
+    "nivel_mazmorra": 1,
+    "arma": {
+        "nom": "Varita de Aprendiz",
+        "dano": 12
+    },
+    "inventario": {
+        "pociones": [
+            {
+                "nombre": "Pocion Buff Ataque",
+                "mana": 0,
+                "cura": 0,
+                "buff_ataque": 10,
+                "cantidad": 0,
+                "icono_path": null
+            }
+        ]
+    }
+}

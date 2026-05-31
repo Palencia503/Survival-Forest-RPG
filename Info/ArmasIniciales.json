@@ -1,0 +1,27 @@
+{
+    "Tanque": {
+        "nom": "Escudo de Recluta",
+        "dano": 5,
+        "defensa": 10
+    },
+    "Mago": {
+        "nom": "Varita de Aprendiz",
+        "dano": 12,
+        "defensa": 2
+    },
+    "Asesino": {
+        "nom": "Dagas Gemelas",
+        "dano": 15,
+        "defensa": 0
+    },
+    "Tirador": {
+        "nom": "Arco Corto",
+        "dano": 14,
+        "defensa": 0
+    },
+    "Guerrero": {
+        "nom": "Espada de Acero",
+        "dano": 10,
+        "defensa": 5
+    }
+}

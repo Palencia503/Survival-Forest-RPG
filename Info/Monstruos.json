@@ -1,0 +1,52 @@
+{
+    "1": {
+        "nombre": "Slime Verde",
+        "hp": 100,
+        "mana": 0,
+        "escudo": 0,
+        "ataque": 5,
+        "nivel": 1,
+        "recompensa": 10,
+        "exp": 35
+    },
+    "2": {
+        "nombre": "Esqueleto",
+        "hp": 80,
+        "mana": 0,
+        "escudo": 5,
+        "ataque": 10,
+        "nivel": 2,
+        "recompensa": 25,
+        "exp": 50
+    },
+    "3": {
+        "nombre": "Goblin",
+        "hp": 70,
+        "mana": 0,
+        "escudo": 2,
+        "ataque": 8,
+        "nivel": 2,
+        "recompensa": 15,
+        "exp": 25
+    },
+    "4": {
+        "nombre": "Orco",
+        "hp": 120,
+        "mana": 0,
+        "escudo": 10,
+        "ataque": 15,
+        "nivel": 3,
+        "recompensa": 50,
+        "exp": 100
+    },
+    "5": {
+        "nombre": "Mago Oscuro",
+        "hp": 200,
+        "mana": 50,
+        "escudo": 0,
+        "ataque": 20,
+        "nivel": 3,
+        "recompensa": 60,
+        "exp": 100
+    }
+}
